@@ -537,6 +537,34 @@
       .nav-dots { display: none; }
     }
 
+    /* ─── Landscape mobile (rotated phone) ───────────────────────────────── */
+    @media (max-height: 520px) {
+      /* In landscape, viewport height is ~390px — way too short for snap */
+      /* Let all slides grow naturally, user scrolls through them */
+      .deck {
+        scroll-snap-type: none !important;
+        overflow-y: auto !important;
+      }
+      .slide {
+        height: auto !important;
+        min-height: 100svh !important;
+        scroll-snap-align: none !important;
+        padding: 24px 40px !important;
+      }
+      /* Smaller fonts in landscape to fit more content */
+      .headline { font-size: clamp(1.4rem, 4vw, 2rem) !important; }
+      .sub { font-size: 0.85rem !important; }
+      .wordmark { font-size: clamp(2rem, 7vw, 3.2rem) !important; }
+      /* Tighten spacing */
+      .label { margin-bottom: 10px !important; }
+      .divider { margin: 10px 0 !important; }
+      .bullet-item { padding: 8px 12px !important; }
+      .card-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important; }
+      .agent-grid { grid-template-columns: repeat(5, 1fr) !important; }
+      .fund-row { flex-direction: row !important; flex-wrap: wrap !important; }
+      .fund-item { flex: 1 1 140px !important; }
+    }
+
     /* ─── Mobile layout overrides (≤ 600px) ──────────────────────────────── */
     @media (max-width: 600px) {
       /* Allow slides with lots of content to grow beyond viewport on mobile */
@@ -1038,24 +1066,24 @@
       <div class="two-col-wide" style="align-items:start;gap:clamp(20px,4vw,48px);">
         <div>
           <div class="headline"><span class="accent">$1M</span> Seed Round</div>
-          <div class="sub" style="margin-top:6px;">18 months to Series B — proven AI orgs outperform hybrid teams.</div>
+          <div class="sub" style="margin-top:6px;font-style:italic;color:var(--cyan);">"One thing to prove: a MachineMachine AI organization outperforms a 10-person hybrid team."</div>
 
-          <div class="fund-row" style="flex-direction:column;gap:10px;">
+          <div class="fund-row" style="flex-direction:column;gap:10px;margin-top:20px;">
             <div class="fund-item">
-              <div class="fi-label">Product</div>
-              <div class="fi-title">Enterprise Platform</div>
-              <div class="fi-body">Production-ready organizational AI infrastructure</div>
+              <div class="fi-label">Product — 50%</div>
+              <div class="fi-title">Enterprise Platform v1</div>
+              <div class="fi-body">Deployable, white-label organizational AI infrastructure</div>
               <div class="fi-bar">
                 <div class="progress-bar-wrap">
-                  <div class="progress-label"><span></span><span style="color:var(--cyan);">40%</span></div>
-                  <div class="progress-track"><div class="progress-fill" style="width:40%"></div></div>
+                  <div class="progress-label"><span></span><span style="color:var(--cyan);">50%</span></div>
+                  <div class="progress-track"><div class="progress-fill" style="width:50%"></div></div>
                 </div>
               </div>
             </div>
             <div class="fund-item">
-              <div class="fi-label">Team</div>
-              <div class="fi-title">Scale to 15 People</div>
-              <div class="fi-body">Engineering, sales &amp; customer success hires</div>
+              <div class="fi-label">First Pilots — 30%</div>
+              <div class="fi-title">3–5 Paying Customers</div>
+              <div class="fi-body">Founders close first deals personally. No sales team needed yet.</div>
               <div class="fi-bar">
                 <div class="progress-bar-wrap">
                   <div class="progress-label"><span></span><span style="color:var(--cyan);">30%</span></div>
@@ -1064,13 +1092,13 @@
               </div>
             </div>
             <div class="fund-item">
-              <div class="fi-label">Market</div>
-              <div class="fi-title">50 Customers · $10M ARR</div>
-              <div class="fi-body">Enterprise GTM &amp; channel partnerships</div>
+              <div class="fi-label">IP &amp; Moat — 20%</div>
+              <div class="fi-title">Own the Category</div>
+              <div class="fi-body">Patent org intelligence framework. Publish AIEOS as open standard.</div>
               <div class="fi-bar">
                 <div class="progress-bar-wrap">
-                  <div class="progress-label"><span></span><span style="color:var(--cyan);">30%</span></div>
-                  <div class="progress-track"><div class="progress-fill" style="width:30%"></div></div>
+                  <div class="progress-label"><span></span><span style="color:var(--cyan);">20%</span></div>
+                  <div class="progress-track"><div class="progress-fill" style="width:20%"></div></div>
                 </div>
               </div>
             </div>
@@ -1078,27 +1106,24 @@
         </div>
 
         <div>
-          <div style="background:rgba(0,217,255,0.05);border:1px solid rgba(0,217,255,0.2);border-radius:16px;padding:clamp(16px,2.5vw,28px);">
-            <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:14px;">18-Month Milestones</div>
+          <div style="background:rgba(0,217,255,0.05);border:1px solid rgba(0,217,255,0.2);border-radius:16px;padding:clamp(16px,2.5vw,28px);margin-bottom:16px;">
+            <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:14px;">18-Month Roadmap</div>
             <div class="check-list">
-              <div class="check-item"><span class="check-icon">→</span> Enterprise platform launch (Q1)</div>
-              <div class="check-item"><span class="check-icon">→</span> First 10 paying customers (Q2)</div>
-              <div class="check-item"><span class="check-icon">→</span> AIEOS open standard published (Q2)</div>
-              <div class="check-item"><span class="check-icon">→</span> $3M ARR milestone (Q3)</div>
-              <div class="check-item"><span class="check-icon">→</span> Patent portfolio filed (Q3)</div>
-              <div class="check-item"><span class="check-icon">→</span> 50 enterprise customers (Q4)</div>
-              <div class="check-item"><span class="check-icon">→</span> $10M ARR → Series B (Q4+)</div>
+              <div class="check-item"><span class="check-icon">→</span> Q1 — Enterprise platform v1 shipped</div>
+              <div class="check-item"><span class="check-icon">→</span> Q2 — First 3 paying pilots (€30–50K each)</div>
+              <div class="check-item"><span class="check-icon">→</span> Q2 — AIEOS open standard published</div>
+              <div class="check-item"><span class="check-icon">→</span> Q3 — Benchmark published: AI org vs hybrid team</div>
+              <div class="check-item"><span class="check-icon">→</span> Q3 — Patent portfolio filed</div>
+              <div class="check-item"><span class="check-icon">→</span> Q4 — €300–500K ARR → Series A raise</div>
             </div>
           </div>
 
-          <div class="stats-row">
-            <div class="stat-box">
-              <div class="stat-num">$10B+</div>
-              <div class="stat-label">Market prize</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-num">2yr</div>
-              <div class="stat-label">Head start</div>
+          <div style="background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.25);border-radius:12px;padding:16px 20px;">
+            <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:10px;">The Founding Team</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="font-size:0.9rem;color:var(--white);"><strong>Mariusz</strong> <span style="color:var(--muted);">— Founder &amp; Platform Architect</span></div>
+              <div style="font-size:0.9rem;color:var(--white);"><strong>Nasr</strong> <span style="color:var(--muted);">— PhD ML · AI Architecture Lead</span></div>
+              <div style="font-size:0.8rem;color:var(--muted);margin-top:4px;">+ 2 hires at Series A: Enterprise Sales Lead · Customer Success</div>
             </div>
           </div>
         </div>
