@@ -874,7 +874,7 @@
       <div class="label label-cyan">The Proof</div>
 
       <div class="headline">Proof of Concept: <span class="accent">AI Org in Action</span></div>
-      <div class="sub">5 specialist agents collaboratively designed an organizational governance system — producing work no single agent could alone.</div>
+      <div class="sub">We ran a real benchmark. Same model. Same task. Different architecture.</div>
 
       <div class="agent-grid">
         <div class="agent-card">
@@ -904,14 +904,40 @@
         </div>
       </div>
 
-      <div class="deliverable-list">
+      <!-- Benchmark table -->
+      <div style="margin:20px 0 0;background:rgba(0,217,255,0.04);border:1px solid rgba(0,217,255,0.15);border-radius:12px;padding:20px 24px;">
+        <div style="font-size:0.72rem;letter-spacing:0.12em;color:var(--cyan);text-transform:uppercase;margin-bottom:14px;">Live Benchmark — Cerebras zai-glm-4.7 · Incident Response Protocol Task</div>
+        <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
+          <tr style="color:var(--muted);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;">
+            <td style="padding:4px 12px 8px 0;">Run</td>
+            <td style="padding:4px 8px 8px;text-align:center;">Single Agent</td>
+            <td style="padding:4px 8px 8px;text-align:center;">Multi-Agent Org</td>
+            <td style="padding:4px 0 8px 8px;text-align:center;">Delta</td>
+          </tr>
+          <tr style="border-top:1px solid rgba(255,255,255,0.07);color:var(--muted);">
+            <td style="padding:8px 12px 8px 0;font-size:0.8rem;">Run 1 — baseline</td>
+            <td style="padding:8px;text-align:center;">90/100</td>
+            <td style="padding:8px;text-align:center;">73/100</td>
+            <td style="padding:8px 0 8px 8px;text-align:center;color:#ff6b6b;">−17</td>
+          </tr>
+          <tr style="border-top:1px solid rgba(255,255,255,0.07);">
+            <td style="padding:8px 12px 8px 0;font-size:0.8rem;">Run 2 — after 1 learning cycle</td>
+            <td style="padding:8px;text-align:center;">84/100</td>
+            <td style="padding:8px;text-align:center;color:var(--cyan);font-weight:600;">87/100</td>
+            <td style="padding:8px 0 8px 8px;text-align:center;color:#4ade80;font-weight:700;">+3 ✅</td>
+          </tr>
+        </table>
+        <div style="margin-top:12px;font-size:0.78rem;color:rgba(255,255,255,0.5);">The org learned why it lost. Applied one fix (structured handoff). Flipped the result.</div>
+      </div>
+
+      <div class="deliverable-list" style="margin-top:16px;">
         <div class="deliverable">
           <span class="d-icon">✅</span>
-          4 protocols + 3 governance layers delivered in &lt;24h — 3× more comprehensive than single-agent output
+          Multi-agent org won 4 of 5 rubric dimensions — added dual-layer detection, complete JSON schemas, 3-tier governance with quorum matrix
         </div>
         <div class="deliverable">
           <span class="d-icon">✅</span>
-          Each agent built on others' work — demonstrable cross-agent dependency chain
+          Self-improving: every run commits lessons to fleet-governance. Improvement curve is auditable in git.
         </div>
       </div>
     </section>
