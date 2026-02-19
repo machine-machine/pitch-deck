@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MachineMachine — Series A Pitch Deck</title>
+  <title>MachineMachine — Seed Round Pitch Deck</title>
 
   <!-- Inter font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -536,6 +536,44 @@
     @media (max-width: 480px) {
       .nav-dots { display: none; }
     }
+
+    /* ─── Mobile layout overrides (≤ 600px) ──────────────────────────────── */
+    @media (max-width: 600px) {
+      /* Bigger fonts since there's lots of vertical space on portrait phone */
+      .headline { font-size: clamp(1.8rem, 8vw, 2.6rem) !important; }
+      .sub { font-size: 1rem !important; }
+
+      /* Wordmark */
+      .wordmark { font-size: clamp(2.6rem, 11vw, 3.6rem) !important; }
+      .title-tagline { font-size: 1.05rem !important; }
+      .title-meta { flex-direction: column; gap: 14px; align-items: center; }
+      .title-meta-item { border-left: none !important; padding-left: 0 !important; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; }
+      .title-meta-item:first-child { border-top: none; padding-top: 0; }
+
+      /* Cards and grids collapse */
+      .card-grid, .card-grid-4 { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+      .hook-contrast { grid-template-columns: 1fr !important; gap: 12px; }
+      .agent-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 8px; }
+      .two-col, .two-col-wide { grid-template-columns: 1fr !important; }
+      .fund-row { flex-direction: column !important; }
+      .contact-grid { grid-template-columns: 1fr !important; }
+
+      /* Bullets */
+      .bullet-item { padding: 10px 14px; }
+      .bullet-text { font-size: 0.9rem !important; }
+
+      /* Comparison table */
+      .comp-table { font-size: 0.78rem; }
+      .comp-row { padding: 10px 12px; }
+
+      /* Stats */
+      .stat-num { font-size: clamp(1.8rem, 8vw, 2.4rem) !important; }
+      .stat-label { font-size: 0.7rem !important; }
+
+      /* Reduce padding a bit more */
+      .slide { padding: 32px 20px 32px 24px !important; }
+      .slide-num { bottom: 14px; right: 14px; font-size: 10px; }
+    }
   </style>
 </head>
 
@@ -569,7 +607,7 @@
       <canvas id="network-canvas"></canvas>
 
       <div class="title-content">
-        <div class="title-pill">Series A — February 2026</div>
+        <div class="title-pill">Seed Round — February 2026</div>
 
         <div class="wordmark" style="margin-top:24px;">
           <span class="machine">Machine</span><span class="dot">.</span><span class="machine2">Machine</span>
@@ -586,7 +624,7 @@
           </div>
           <div class="title-meta-item" style="border-left:1px solid rgba(255,255,255,0.1);padding-left:24px;">
             <div class="tmi-label">Round</div>
-            <div class="tmi-val">$5M Series A</div>
+            <div class="tmi-val">$1M Seed Round</div>
           </div>
           <div class="title-meta-item" style="border-left:1px solid rgba(255,255,255,0.1);padding-left:24px;">
             <div class="tmi-label">Stage</div>
@@ -993,7 +1031,7 @@
 
       <div class="two-col-wide" style="align-items:start;gap:clamp(20px,4vw,48px);">
         <div>
-          <div class="headline"><span class="accent">$5M</span> Series A</div>
+          <div class="headline"><span class="accent">$1M</span> Seed Round</div>
           <div class="sub" style="margin-top:6px;">18 months to Series B — proven AI orgs outperform hybrid teams.</div>
 
           <div class="fund-row" style="flex-direction:column;gap:10px;">
