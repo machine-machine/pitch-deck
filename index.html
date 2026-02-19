@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MachineMachine — Series A Pitch Deck</title>
+
+  <!-- Reveal.js -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Base Variables ─────────────────────────────────────────────────── */
+    :root {
+      --navy:   #0F1729;
+      --navy2:  #111d38;
+      --purple: #7C3AED;
+      --purple-light: #9d5ff5;
+      --cyan:   #00D9FF;
+      --cyan-dim: #00b8d9;
+      --white:  #FFFFFF;
+      --muted:  rgba(255,255,255,0.55);
+      --card-bg: rgba(255,255,255,0.04);
+      --card-border: rgba(255,255,255,0.08);
+    }
+
+    /* ─── Reveal overrides ───────────────────────────────────────────────── */
+    .reveal-viewport { background: var(--navy); }
+    .reveal { font-family: 'Inter', system-ui, sans-serif; color: var(--white); }
+    .reveal .slides { text-align: left; }
+    .reveal .slides section { padding: 0; }
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 { font-family: 'Inter', system-ui, sans-serif; text-transform: none; letter-spacing: -0.02em; margin: 0; }
+    .reveal p { margin: 0; }
+    .reveal ul { list-style: none; margin: 0; padding: 0; }
+    .reveal li { margin: 0; padding: 0; }
+    .reveal a { color: var(--cyan); }
+
+    /* ─── Slide shell ─────────────────────────────────────────────────────── */
+    .slide {
+      width: 100%;
+      height: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 80px;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ─── Decorative corner accent ────────────────────────────────────────── */
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--purple) 0%, var(--cyan) 100%);
+      opacity: 0.7;
+    }
+
+    /* ─── Slide number ────────────────────────────────────────────────────── */
+    .slide-num {
+      position: absolute;
+      bottom: 28px; right: 40px;
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── Label chips ─────────────────────────────────────────────────────── */
+    .label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .label-purple { background: rgba(124,58,237,0.2); color: var(--purple-light); border: 1px solid rgba(124,58,237,0.35); }
+    .label-cyan   { background: rgba(0,217,255,0.12); color: var(--cyan); border: 1px solid rgba(0,217,255,0.3); }
+
+    /* ─── Typography helpers ──────────────────────────────────────────────── */
+    .headline {
+      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--white);
+    }
+    .headline .accent { color: var(--cyan); }
+    .headline .purple { color: var(--purple-light); }
+
+    .sub {
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      font-weight: 400;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-top: 16px;
+    }
+
+    .mega {
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--cyan) 0%, var(--purple-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ─── Card grid ───────────────────────────────────────────────────────── */
+    .card-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .card-grid-2 { grid-template-columns: 1fr 1fr; }
+    .card-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .card-grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: rgba(124,58,237,0.4); }
+    .card .card-icon { font-size: 1.8rem; margin-bottom: 10px; display: block; }
+    .card .card-title { font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+    .card .card-body  { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+    .card .card-tag   { font-size: 0.72rem; font-weight: 600; color: var(--cyan); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px; display: block; }
+
+    /* ─── Bullet list ─────────────────────────────────────────────────────── */
+    .bullet-list { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
+    .bullet-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+    }
+    .bullet-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+    .bullet-text { font-size: 0.95rem; color: rgba(255,255,255,0.85); line-height: 1.5; }
+    .bullet-text strong { color: var(--white); font-weight: 700; }
+
+    /* ─── Comparison table ────────────────────────────────────────────────── */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 28px;
+      font-size: 0.9rem;
+    }
+    .compare-table th {
+      padding: 12px 20px;
+      text-align: left;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .compare-table th:first-child { color: var(--muted); background: rgba(255,255,255,0.03); border-radius: 8px 0 0 0; }
+    .compare-table th:last-child  { color: var(--cyan); background: rgba(0,217,255,0.08); border-radius: 0 8px 0 0; }
+    .compare-table td { padding: 13px 20px; border-top: 1px solid var(--card-border); vertical-align: top; line-height: 1.45; }
+    .compare-table td:first-child { color: var(--muted); background: rgba(255,255,255,0.015); }
+    .compare-table td:last-child  { color: var(--white); background: rgba(0,217,255,0.04); font-weight: 500; }
+    .compare-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+    .compare-table tr:last-child td:last-child  { border-radius: 0 0 8px 0; }
+
+    /* ─── Stats row ───────────────────────────────────────────────────────── */
+    .stats-row { display: flex; gap: 20px; margin-top: 32px; }
+    .stat-box {
+      flex: 1;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+    .stat-box .stat-num {
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--cyan), var(--purple-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-box .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+
+    /* ─── Divider ─────────────────────────────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, var(--purple) 0%, transparent 100%);
+      margin: 24px 0;
+      opacity: 0.35;
+    }
+
+    /* ─── Tagline box ─────────────────────────────────────────────────────── */
+    .tagline-box {
+      margin-top: 28px;
+      padding: 18px 24px;
+      border-left: 3px solid var(--purple);
+      background: rgba(124,58,237,0.08);
+      border-radius: 0 8px 8px 0;
+    }
+    .tagline-box p {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--white);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+    .tagline-box .cyan { color: var(--cyan); }
+
+    /* ─── Checkmark list ──────────────────────────────────────────────────── */
+    .check-list { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+    .check-item { display: flex; align-items: center; gap: 12px; font-size: 0.92rem; color: rgba(255,255,255,0.85); }
+    .check-icon { color: var(--cyan); font-size: 1.1rem; flex-shrink: 0; }
+
+    /* ─── Progress bars ───────────────────────────────────────────────────── */
+    .progress-bar-wrap { margin-top: 10px; }
+    .progress-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--muted); margin-bottom: 5px; }
+    .progress-track { height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
+    .progress-fill  { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--purple), var(--cyan)); }
+
+    /* ─── SLIDE 1 — Title with Network Animation ──────────────────────────── */
+    #slide-title {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px;
+    }
+    #slide-title::before { display: none; }
+
+    #network-canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+    }
+
+    .title-content { position: relative; z-index: 1; }
+
+    .wordmark {
+      font-size: clamp(2.8rem, 6vw, 4.8rem);
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      color: var(--white);
+    }
+    .wordmark .machine { color: var(--white); }
+    .wordmark .dot { color: var(--purple); }
+    .wordmark .machine2 { color: var(--cyan); }
+
+    .title-tagline {
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+      margin-top: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    .title-meta {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+    }
+    .title-meta-item {
+      text-align: center;
+    }
+    .title-meta-item .tmi-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+    .title-meta-item .tmi-val   { font-size: 0.95rem; font-weight: 600; color: var(--white); }
+
+    .title-pill {
+      display: inline-block;
+      margin-top: 32px;
+      padding: 8px 24px;
+      border-radius: 24px;
+      border: 1px solid rgba(124,58,237,0.5);
+      background: rgba(124,58,237,0.12);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--purple-light);
+    }
+
+    /* ─── SLIDE 2 — The Hook ──────────────────────────────────────────────── */
+    .hook-question {
+      font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      max-width: 900px;
+    }
+    .hook-question .q-mark { color: var(--cyan); }
+
+    .hook-contrast {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 36px;
+    }
+    .hook-side {
+      padding: 28px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .hook-side.bad  { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); }
+    .hook-side.good { background: rgba(0,217,255,0.06);   border: 1px solid rgba(0,217,255,0.25); }
+    .hook-side .hs-icon  { font-size: 2.5rem; display: block; margin-bottom: 12px; }
+    .hook-side .hs-title { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .hook-side.bad  .hs-title { color: var(--muted); }
+    .hook-side.good .hs-title { color: var(--cyan); }
+    .hook-side .hs-body  { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+    /* ─── SLIDE 10 — Vision (full bleed) ─────────────────────────────────── */
+    #slide-vision {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    #slide-vision::before { display: none; }
+    .vision-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(124,58,237,0.25) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 50%, rgba(0,217,255,0.15) 0%, transparent 60%),
+                  var(--navy);
+    }
+    .vision-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+    .vision-statement {
+      font-size: clamp(1.5rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+    }
+    .vision-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-top: 24px;
+      line-height: 1.6;
+    }
+
+    /* ─── Agent grid (slide 6) ────────────────────────────────────────────── */
+    .agent-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 28px; }
+    .agent-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px 14px;
+      text-align: center;
+    }
+    .agent-card .ag-icon  { font-size: 2rem; display: block; margin-bottom: 10px; }
+    .agent-card .ag-title { font-size: 0.8rem; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .agent-card .ag-role  { font-size: 0.7rem; color: var(--cyan); font-weight: 500; }
+
+    .deliverable-list {
+      display: flex;
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .deliverable {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      background: rgba(0,217,255,0.06);
+      border: 1px solid rgba(0,217,255,0.2);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .deliverable .d-icon { font-size: 1.2rem; }
+
+    /* ─── Fund breakdown (slide 11) ───────────────────────────────────────── */
+    .fund-row { display: flex; gap: 16px; margin-top: 28px; }
+    .fund-item {
+      flex: 1;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 22px 18px;
+    }
+    .fund-item .fi-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 8px; }
+    .fund-item .fi-title { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+    .fund-item .fi-body  { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+    .fund-item .fi-bar   { margin-top: 12px; }
+
+    /* ─── Contact slide ───────────────────────────────────────────────────── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; }
+    .contact-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 28px;
+    }
+    .contact-card .cc-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 16px; }
+    .contact-card .cc-line  { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--white); margin-bottom: 10px; }
+    .contact-card .cc-icon  { font-size: 1.1rem; }
+    .contact-card .cc-val   { color: var(--cyan); }
+
+    /* ─── Two-col layout ──────────────────────────────────────────────────── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+    .two-col-wide { display: grid; grid-template-columns: 3fr 2fr; gap: 40px; align-items: start; }
+
+    /* ─── Market segments ─────────────────────────────────────────────────── */
+    .segment-list { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
+    .segment-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+    }
+    .segment-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .segment-body .sb-title { font-size: 0.95rem; font-weight: 700; color: var(--white); }
+    .segment-body .sb-sub   { font-size: 0.8rem; color: var(--muted); margin-top: 3px; }
+    .segment-badge {
+      margin-left: auto;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: rgba(0,217,255,0.1);
+      color: var(--cyan);
+      border: 1px solid rgba(0,217,255,0.25);
+      white-space: nowrap;
+    }
+
+    /* ─── Reveal.js navigation override ──────────────────────────────────── */
+    .reveal .controls { color: var(--purple); }
+    .reveal .progress  { color: var(--purple); }
+
+    /* ─── Global glow header line ─────────────────────────────────────────── */
+    .glow-line {
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple) 0%, var(--cyan) 100%);
+      border-radius: 2px;
+      margin-bottom: 28px;
+      width: 60px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SLIDE 1 — TITLE
+═══════════════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="slide" id="slide-title">
+    <canvas id="network-canvas"></canvas>
+
+    <div class="title-content">
+      <div class="title-pill">Series A — February 2026</div>
+
+      <div class="wordmark" style="margin-top:28px;">
+        <span class="machine">Machine</span><span class="dot">.</span><span class="machine2">Machine</span>
+      </div>
+
+      <div class="title-tagline">
+        Building AI Organizations, Not Just AI Agents
+      </div>
+
+      <div class="title-meta">
+        <div class="title-meta-item">
+          <div class="tmi-label">Presented by</div>
+          <div class="tmi-val">Peter [Last Name]</div>
+        </div>
+        <div class="title-meta-item" style="border-left:1px solid rgba(255,255,255,0.1);padding-left:32px;">
+          <div class="tmi-label">Round</div>
+          <div class="tmi-val">$5M Series A</div>
+        </div>
+        <div class="title-meta-item" style="border-left:1px solid rgba(255,255,255,0.1);padding-left:32px;">
+          <div class="tmi-label">Stage</div>
+          <div class="tmi-val">Working Prototype</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-num">01 / 12</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SLIDE 2 — THE HOOK
+═══════════════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="slide">
+    <div class="label label-purple">The Question Everyone's Missing</div>
+
+    <div class="hook-question">
+      What if you could deploy an entire AI organization that<br/>
+      <span class="q-mark">thinks collectively</span> and evolves autonomously<span class="q-mark">?</span>
+    </div>
+
+    <div class="hook-contrast">
+      <div class="hook-side bad">
+        <span class="hs-icon">👤</span>
+        <div class="hs-title">Individual Agents</div>
+        <div class="hs-body">
+          Isolated workers.<br/>
+          No shared memory.<br/>
+          No coordination.<br/>
+          Limited to sum of parts.
+        </div>
+      </div>
+      <div class="hook-side good">
+        <span class="hs-icon">🌐</span>
+        <div class="hs-title">Organizational Intelligence</div>
+        <div class="hs-body">
+          Collective memory &amp; learning.<br/>
+          Autonomous coordination.<br/>
+          Emergent capabilities.<br/>
+          Smarter than the sum of parts.
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div style="font-size:0.9rem;color:var(--muted);font-style:italic;">
+      "It's like the difference between hiring brilliant individuals versus building a high-performing team."
+    </div>
+
+    <div class="slide-num">02 / 12</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SLIDE 3 — THE PROBLEM
+═══════════════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="slide">
+    <div class="label label-purple">The Problem</div>
+
+    <div class="headline">AI Agents Work <span class="accent">in Isolation</span></div>
+    <div class="sub">Companies deploy dozens of AI agents — but they behave like a chaotic swarm.</div>
+
+    <div class="bullet-list" style="margin-top:28px;">
+      <div class="bullet-item">
+        <span class="bullet-icon">⚡</span>
+        <div class="bullet-text"><strong>No coordination</strong> — Agents don't communicate or share context across tasks</div>
+      </div>
+      <div class="bullet-item">
+        <span class="bullet-icon">🧠</span>
+        <div class="bullet-text"><strong>No shared learning</strong> — Every agent starts from zero, every time</div>
+      </div>
+      <div class="bullet-item">
+        <span class="bullet-icon">🌪️</span>
+        <div class="bullet-text"><strong>Chaotic swarm, not intelligent organization</strong> — Scale adds noise, not intelligence</div>
+      </div>
+      <div class="bullet-item">
+        <span class="bullet-icon">🔗</span>
+        <div class="bullet-text"><strong>Like brilliant people who can't collaborate</strong> — Individual talent without organizational structure</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div style="font-size:1rem;font-weight:600;color:var(--white);">
+      The bottleneck isn't individual AI capability —
+      <span style="color:var(--cyan);">it's organizational intelligence.</span>
+    </div>
+
+    <div class="slide-num">03 / 12</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SLIDE 4 — MARKET CONTEXT
+═══════════════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="slide">
+    <div class="label label-cyan">Market Context</div>
+
+    <div class="two-col-wide">
+      <div>
+        <div class="headline">Everyone's Building <span class="accent">Individual Agents</span></div>
+        <div class="sub" style="margin-top:12px;">The entire industry is solving the wrong problem.</div>
+
+        <div class="bullet-list" style="margin-top:24px;">
+          <div class="bullet-item">
+            <span class="bullet-icon">🔧</span>
+            <div class="bullet-text"><strong>OpenClaw</strong> — Agent framework &amp; orchestration</div>
+          </div>
+          <div class="bullet-item">
+            <span class="bullet-icon">🤖</span>
+            <div class="bullet-text"><strong>AutoGPT</strong> — Personal AI assistant automation</div>
+          </div>
+          <div class="bullet-item">
+            <span class="bullet-icon">🚢</span>
+            <div class="bullet-text"><strong>CrewAI</strong> — Multi-agent task coordination</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <div style="font-size:0.9rem;color:var(--muted);font-style:italic;">
+          But they're all missing the bigger opportunity...
+        </div>
+      </div>
+
+      <div style="text-align:center;">
+        <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:36px 24px;">
+          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:12px;">AI Agent Market</div>
+          <div class="mega">$47B</div>
+          <div style="font-size:0.85rem;color:var(--muted);margin-top:12px;">2024–2030</div>
+          <div style="margin-top:16px;">
+            <span style="display:inline-block;padding:6px 14px;background:rgba(0,217,255,0.1);border:1px solid rgba(0,217,255,0.3);border-radius:20px;font-size:0.78rem;font-weight:700;color:var(--cyan);">34% CAGR</span>
+          </div>
+          <div class="divider" style="margin-top:20px;"></div>
+          <div style="font-size:0.82rem;color:rgba(255,255,255,0.7);font-weight:600;margin-top:4px;">
+            MachineMachine is targeting the <span style="color:var(--purple-light);">organizational layer</span> nobody else sees
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-num">04 / 12</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SLIDE 5 — THE SOLUTION
+═══════════════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="slide">
+    <div class="label label-purple">The Solution</div>
+
+    <div class="headline">MachineMachine = <span class="purple">Organizational Intelligence</span></div>
+
+    <div class="card-grid card-grid-4" style="margin-top:28px;">
+      <div class="card">
+        <span class="card-icon">🧬</span>
+        <div class="card-title">Collective Intelligence</div>
+        <div class="card-body">System becomes smarter than the sum of individual agents</div>
+      </div>
+      <div class="card">
+        <span class="card-icon">⚙️</span>
+        <div class="card-title">Self-Organization</div>
+        <div class="card-body">Agents coordinate autonomously using game theory &amp; network science</div>
+      </div>
+      <div class="card">
+        <span class="card-icon">🔬</span>
+        <div class="card-title">Scientific Foundation</div>
+        <div class="card-body">Integral theory, systems science &amp; complexity theory applied to AI</div>
+      </div>
+      <div class="card">
+        <span class="card-icon">📈</span>
+        <div class="card-title">Evolutionary</div>
+        <div class="card-body">Organizations improve themselves continuously over time</div>
+      </div>
+    </div>
+
+    <div class="tagline-box">
+      <p>
+        "<span class="cyan">OpenClaw</span> builds agents.&nbsp;&nbsp;
+        <strong>MachineMachine</strong> builds organizations."
+      </p>
+    </div>
+
+    <div class="slide-num">05 / 12</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SLIDE 6 — THE PROOF
+═══════════════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="slide">
+    <div class="label label-cyan">The Proof</div>
+
+    <div class="headline">World's First AI <span class="accent">Organizational Consciousness</span></div>
+    <div class="sub">5 specialist agents working together — deployed in under 24 hours.</div>
+
+    <div class="agent-grid">
+      <div class="agent-card">
+        <span class="ag-icon">🏗️</span>
+        <div class="ag-title">Systems Architect</div>
+        <div class="ag-role">Network topology &amp; infrastructure design</div>
+      </div>
+      <div class="agent-card">
+        <span class="ag-icon">🤝</span>
+        <div class="ag-title">Coordination Specialist</div>
+        <div class="ag-role">Protocol &amp; handoff management</div>
+      </div>
+      <div class="agent-card">
+        <span class="ag-icon">⚖️</span>
+        <div class="ag-title">Governance Designer</div>
+        <div class="ag-role">Policy &amp; decision frameworks</div>
+      </div>
+      <div class="agent-card">
+        <span class="ag-icon">🧠</span>
+        <div class="ag-title">Emergence Engineer</div>
+        <div class="ag-role">Collective intelligence optimization</div>
+      </div>
+      <div class="agent-card">
+        <span class="ag-icon">📊</span>
+        <div class="ag-title">Network Analyst</div>
+        <div class="ag-role">Flow analysis &amp; performance metrics</div>
+      </div>
+    </div>
+
+    <div class="deliverable-list">
+      <div class="deliverable">
+        <span class="d-icon">✅</span>
+        All Phase 1 deliverables complete in &lt;24 hours
+      </div>
+      <div class="deliverable">
+        <span class="d-icon">✅</span>
+        Measurable collective intelligence &amp; emergence demonstrated
+      </div>
+    </div>
+
+    <div class="slide-num">06 / 12</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SLIDE 7 — SCIENTIFIC FOUNDATION
+═══════════════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="slide">
+    <div class="label label-purple">Scientific Foundation</div>
+
+    <div class="headline">Built on <span class="purple">Organizational Science</span></div>
+    <div class="sub">The only AI platform applying proven frameworks from organizational research.</div>
+
+    <div class="card-grid card-grid-2" style="margin-top:28px;">
+      <div class="card">
+        <span class="card-tag">Framework 01</span>
+        <span class="card-icon">🔷</span>
+        <div class="card-title">Integral Theory</div>
+        <div class="card-body">4-quadrant model of organizational development — interior/exterior, individual/collective — applied to agent design</div>
+      </div>
+      <div class="card">
+        <span class="card-tag">Framework 02</span>
+        <span class="card-icon">🌀</span>
+        <div class="card-title">Systems Science</div>
+        <div class="card-body">Complex adaptive systems thinking — feedback loops, emergence, and non-linear dynamics in multi-agent environments</div>
+      </div>
+      <div class="card">
+        <span class="card-tag">Framework 03</span>
+        <span class="card-icon">🕸️</span>
+        <div class="card-title">Network Theory</div>
+        <div class="card-body">Optimal information flow topology — graph-theoretic agent placement for maximum collective intelligence</div>
+      </div>
+      <div class="card">
+        <span class="card-tag">Framework 04</span>
+        <span class="card-icon">♟️</span>
+        <div class="card-title">Game Theory</div>
+        <div class="card-body">Mechanism design for resource allocation — ensuring agents cooperate efficiently without central coordination</div>
+      </div>
+    </div>
+
+    <div class="slide-num">07 / 12</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SLIDE 8 — COMPETITIVE ADVANTAGE
+═══════════════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="slide">
+    <div class="label label-cyan">Competitive Advantage</div>
+
+    <div class="headline">Beyond <span class="accent">Every Competitor</span></div>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Others (OpenClaw / AutoGPT / CrewAI)</th>
+          <th>MachineMachine</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Individual agents — each works in isolation</td>
+          <td>🌐 Organizational intelligence — collective thinking</td>
+        </tr>
+        <tr>
+          <td>Manual coordination — humans must orchestrate</td>
+          <td>⚙️ Self-organizing systems — autonomous coordination</td>
+        </tr>
+        <tr>
+          <td>Limited to sum of parts — no emergence</td>
+          <td>🧬 Emergent collective consciousness — smarter together</td>
+        </tr>
+        <tr>
+          <td>Vendor-dependent — cloud lock-in</td>
+          <td>🏠 Self-hosted infrastructure — complete control</td>
+        </tr>
+        <tr>
+          <td>No scientific foundation — empirical guessing</td>
+          <td>🔬 Proven organizational science — systematic design</td>
+        </tr>
+        <tr>
+          <td>Agents discarded — no institutional memory</td>
+          <td>📚 Evolving organizations — continuous improvement</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="slide-num">08 / 12</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SLIDE 9 — MARKET OPPORTUNITY
+═══════════════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="slide">
+    <div class="label label-purple">Market Opportunity</div>
+
+    <div class="headline">$47B+ Market <span class="purple">Transformation</span></div>
+    <div class="sub">We're not building a productivity tool — we're building the platform for organizational transformation.</div>
+
+    <div class="two-col" style="margin-top:24px;">
+      <div>
+        <div class="segment-list">
+          <div class="segment-item">
+            <span class="segment-icon">🏢</span>
+            <div class="segment-body">
+              <div class="sb-title">Enterprise</div>
+              <div class="sb-sub">Replace entire departments with AI organizations — measurable ROI vs. hybrid teams</div>
+            </div>
+            <span class="segment-badge">Primary</span>
+          </div>
+          <div class="segment-item">
+            <span class="segment-icon">📈</span>
+            <div class="segment-body">
+              <div class="sb-title">SMB</div>
+              <div class="sb-sub">AI workforce that scales with business growth — enterprise capabilities at SMB price</div>
+            </div>
+            <span class="segment-badge">Growth</span>
+          </div>
+          <div class="segment-item">
+            <span class="segment-icon">🛠️</span>
+            <div class="segment-body">
+              <div class="sb-title">Developer Platforms</div>
+              <div class="sb-sub">Infrastructure layer for organizational AI apps — "AWS for AI organizations"</div>
+            </div>
+            <span class="segment-badge">Platform</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:12px;padding:24px;">
+          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:16px;">Competitive Moats</div>
+          <div class="check-list">
+            <div class="check-item"><span class="check-icon">✦</span> Scientific Foundation — only player using org science</div>
+            <div class="check-item"><span class="check-icon">✦</span> Self-Hosted — no vendor lock-in, unlimited scale</div>
+            <div class="check-item"><span class="check-icon">✦</span> AIEOS Standard — cross-platform agent portability</div>
+            <div class="check-item"><span class="check-icon">✦</span> Collective Intelligence — emergent capabilities</div>
+            <div class="check-item"><span class="check-icon">✦</span> 2-year head start on organizational AI</div>
+          </div>
+        </div>
+
+        <div class="stats-row" style="margin-top:16px;">
+          <div class="stat-box">
+            <div class="stat-num">34%</div>
+            <div class="stat-label">Market CAGR<br/>2024–2030</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">$10B+</div>
+            <div class="stat-label">Organizational AI<br/>sub-market</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-num">09 / 12</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SLIDE 10 — THE VISION
+═══════════════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="slide" id="slide-vision">
+    <div class="vision-bg"></div>
+
+    <div class="vision-content">
+      <div class="label label-purple" style="margin:0 auto 24px;">The Vision</div>
+
+      <div class="vision-statement">
+        Every organization will have<br/>
+        an <span style="color:var(--cyan);">AI workforce.</span><br/><br/>
+        The question is:<br/>
+        <span style="color:var(--muted);">Individual agents</span><br/>
+        or <span style="color:var(--purple-light);">intelligent organizations?</span>
+      </div>
+
+      <div class="vision-sub">
+        MachineMachine is the platform for<br/>
+        <strong style="color:var(--white);">transcendent AI organizational consciousness</strong> —<br/>
+        the future of work itself.
+      </div>
+
+      <div style="margin-top:36px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap;">
+        <span style="padding:8px 18px;background:rgba(0,217,255,0.1);border:1px solid rgba(0,217,255,0.3);border-radius:20px;font-size:0.82rem;font-weight:600;color:var(--cyan);">Thinks Collectively</span>
+        <span style="padding:8px 18px;background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:20px;font-size:0.82rem;font-weight:600;color:var(--purple-light);">Evolves Autonomously</span>
+        <span style="padding:8px 18px;background:rgba(0,217,255,0.1);border:1px solid rgba(0,217,255,0.3);border-radius:20px;font-size:0.82rem;font-weight:600;color:var(--cyan);">Scales Exponentially</span>
+      </div>
+    </div>
+
+    <div class="slide-num">10 / 12</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SLIDE 11 — THE ASK
+═══════════════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="slide">
+    <div class="label label-cyan">The Ask</div>
+
+    <div class="two-col-wide" style="align-items:start;gap:48px;">
+      <div>
+        <div class="headline"><span class="accent">$5M</span> Series A</div>
+        <div class="sub" style="margin-top:8px;">18 months to Series B — proven AI orgs outperform hybrid teams.</div>
+
+        <div class="fund-row" style="flex-direction:column;gap:12px;margin-top:24px;">
+          <div class="fund-item">
+            <div class="fi-label">Product</div>
+            <div class="fi-title">Enterprise Platform</div>
+            <div class="fi-body">Production-ready organizational AI infrastructure</div>
+            <div class="fi-bar">
+              <div class="progress-bar-wrap">
+                <div class="progress-label"><span></span><span style="color:var(--cyan);">40%</span></div>
+                <div class="progress-track"><div class="progress-fill" style="width:40%"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="fund-item">
+            <div class="fi-label">Team</div>
+            <div class="fi-title">Scale to 15 People</div>
+            <div class="fi-body">Engineering, sales &amp; customer success hires</div>
+            <div class="fi-bar">
+              <div class="progress-bar-wrap">
+                <div class="progress-label"><span></span><span style="color:var(--cyan);">30%</span></div>
+                <div class="progress-track"><div class="progress-fill" style="width:30%"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="fund-item">
+            <div class="fi-label">Market</div>
+            <div class="fi-title">50 Customers · $10M ARR</div>
+            <div class="fi-body">Enterprise GTM &amp; channel partnerships</div>
+            <div class="fi-bar">
+              <div class="progress-bar-wrap">
+                <div class="progress-label"><span></span><span style="color:var(--cyan);">30%</span></div>
+                <div class="progress-track"><div class="progress-fill" style="width:30%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="background:rgba(0,217,255,0.05);border:1px solid rgba(0,217,255,0.2);border-radius:16px;padding:28px;">
+          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:16px;">18-Month Milestones</div>
+          <div class="check-list">
+            <div class="check-item"><span class="check-icon">→</span> Enterprise platform launch (Q1)</div>
+            <div class="check-item"><span class="check-icon">→</span> First 10 paying customers (Q2)</div>
+            <div class="check-item"><span class="check-icon">→</span> AIEOS open standard published (Q2)</div>
+            <div class="check-item"><span class="check-icon">→</span> $3M ARR milestone (Q3)</div>
+            <div class="check-item"><span class="check-icon">→</span> Patent portfolio filed (Q3)</div>
+            <div class="check-item"><span class="check-icon">→</span> 50 enterprise customers (Q4)</div>
+            <div class="check-item"><span class="check-icon">→</span> $10M ARR → Series B (Q4+)</div>
+          </div>
+        </div>
+
+        <div class="stats-row" style="margin-top:16px;">
+          <div class="stat-box">
+            <div class="stat-num">$10B+</div>
+            <div class="stat-label">Market prize</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">2yr</div>
+            <div class="stat-label">Head start</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-num">11 / 12</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SLIDE 12 — CONTACT & DEMO
+═══════════════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="slide">
+    <div class="label label-purple">See It in Action</div>
+
+    <div class="headline">Ready to <span class="accent">Experience</span> Collective Intelligence<span class="accent">?</span></div>
+    <div class="sub">Our 5-agent workforce is live and solving complex problems in real-time. There's nothing else like it.</div>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="cc-title">Get in Touch</div>
+        <div class="cc-line"><span class="cc-icon">👤</span> <span>Peter [Last Name] — Business Development</span></div>
+        <div class="cc-line"><span class="cc-icon">📧</span> <span class="cc-val">[peter.email]</span></div>
+        <div class="cc-line"><span class="cc-icon">🔗</span> <span class="cc-val">[peter.linkedin]</span></div>
+        <div class="cc-line" style="margin-top:12px;"><span class="cc-icon">🛠️</span> <span>Mario [Last Name] — Founder &amp; CTO</span></div>
+        <div class="cc-line"><span class="cc-icon">📝</span> <span style="color:var(--muted);font-size:0.85rem;">Technical deep-dive available on request</span></div>
+      </div>
+
+      <div class="contact-card" style="background:rgba(124,58,237,0.06);border-color:rgba(124,58,237,0.3);">
+        <div class="cc-title" style="color:var(--purple-light);">Live Demo Available</div>
+        <div style="font-size:0.9rem;color:rgba(255,255,255,0.8);line-height:1.6;margin-bottom:16px;">
+          Watch 5 specialist AI agents solve complex organizational problems together — demonstrating emergence and collective intelligence in real time.
+        </div>
+        <div class="check-list">
+          <div class="check-item"><span class="check-icon" style="color:var(--purple-light);">✦</span> Network topology design</div>
+          <div class="check-item"><span class="check-icon" style="color:var(--purple-light);">✦</span> Autonomous governance decisions</div>
+          <div class="check-item"><span class="check-icon" style="color:var(--purple-light);">✦</span> Measurable emergent behavior</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tagline-box" style="margin-top:24px;">
+      <p>
+        "The companies that adopt <span class="cyan">AI organizational intelligence</span> first will dominate their industries.<br/>
+        <strong>MachineMachine is the platform that makes it possible.</strong>"
+      </p>
+    </div>
+
+    <div class="slide-num">12 / 12</div>
+  </div>
+</section>
+
+</div><!-- /.slides -->
+</div><!-- /.reveal -->
+
+<!-- ─── Reveal.js ────────────────────────────────────────────────────────── -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: false,
+  controls: true,
+  progress: true,
+  center: false,
+  transition: 'slide',
+  transitionSpeed: 'fast',
+  backgroundTransition: 'fade',
+  width: 1280,
+  height: 720,
+  margin: 0,
+  minScale: 0.2,
+  maxScale: 2.0,
+});
+</script>
+
+<!-- ─── Network Canvas Animation (Title Slide) ───────────────────────────── -->
+<script>
+(function() {
+  const canvas = document.getElementById('network-canvas');
+  const ctx = canvas.getContext('2d');
+
+  const NAVY   = '#0F1729';
+  const PURPLE = '#7C3AED';
+  const CYAN   = '#00D9FF';
+
+  let W, H, nodes, animId;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function randBetween(a, b) { return a + Math.random() * (b - a); }
+
+  function initNodes() {
+    nodes = [];
+    const count = Math.floor((W * H) / 18000);
+    for (let i = 0; i < Math.max(count, 30); i++) {
+      nodes.push({
+        x:  randBetween(0, W),
+        y:  randBetween(0, H),
+        vx: randBetween(-0.25, 0.25),
+        vy: randBetween(-0.18, 0.18),
+        r:  randBetween(1.5, 3.5),
+        col: Math.random() > 0.5 ? PURPLE : CYAN,
+      });
+    }
+  }
+
+  const CONNECT_DIST = 180;
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // faint radial gradient overlay
+    const grad = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, W*0.6);
+    grad.addColorStop(0, 'rgba(124,58,237,0.08)');
+    grad.addColorStop(1, 'rgba(15,23,41,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    // lines
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < CONNECT_DIST) {
+          const alpha = (1 - dist / CONNECT_DIST) * 0.25;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(124,58,237,${alpha})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // dots
+    for (const n of nodes) {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = n.col + '99';
+      ctx.fill();
+
+      // glow
+      const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 4);
+      g.addColorStop(0, n.col + '33');
+      g.addColorStop(1, 'transparent');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r * 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      // move
+      n.x += n.vx;
+      n.y += n.vy;
+      if (n.x < 0 || n.x > W) n.vx *= -1;
+      if (n.y < 0 || n.y > H) n.vy *= -1;
+    }
+  }
+
+  function loop() {
+    draw();
+    animId = requestAnimationFrame(loop);
+  }
+
+  function start() {
+    resize();
+    initNodes();
+    if (animId) cancelAnimationFrame(animId);
+    loop();
+  }
+
+  window.addEventListener('resize', () => { resize(); initNodes(); });
+
+  // Start when title slide is visible, pause otherwise
+  Reveal.on('slidechanged', function(e) {
+    if (e.indexh === 0) {
+      start();
+    } else {
+      if (animId) { cancelAnimationFrame(animId); animId = null; }
+    }
+  });
+
+  // Initial load
+  Reveal.on('ready', function() {
+    if (Reveal.getIndices().h === 0) start();
+  });
+})();
+</script>
+
+</body>
+</html>
