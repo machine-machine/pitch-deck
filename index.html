@@ -539,6 +539,13 @@
 
     /* ─── Mobile layout overrides (≤ 600px) ──────────────────────────────── */
     @media (max-width: 600px) {
+      /* Allow slides with lots of content to grow beyond viewport on mobile */
+      /* scroll-snap still snaps to start, user can scroll within slide if needed */
+      .slide {
+        height: auto !important;
+        min-height: 100dvh !important;
+      }
+
       /* Bigger fonts since there's lots of vertical space on portrait phone */
       .headline { font-size: clamp(1.8rem, 8vw, 2.6rem) !important; }
       .sub { font-size: 1rem !important; }
@@ -650,9 +657,9 @@
           <span class="hs-icon">👤</span>
           <div class="hs-title">Individual Agents</div>
           <div class="hs-body">
-            Isolated workers.<br/>
-            No shared memory.<br/>
-            No coordination.<br/>
+            Isolated reasoning.<br/>
+            Shared data, not shared intelligence.<br/>
+            Coordination without cognition.<br/>
             Limited to sum of parts.
           </div>
         </div>
@@ -686,26 +693,25 @@
       <div class="bullet-list">
         <div class="bullet-item">
           <span class="bullet-icon">⚡</span>
-          <div class="bullet-text"><strong>No coordination</strong> — Agents don't communicate or share context across tasks</div>
+          <div class="bullet-text"><strong>Coordination without cognition</strong> — agents route tasks but never develop shared understanding</div>
         </div>
         <div class="bullet-item">
           <span class="bullet-icon">🧠</span>
-          <div class="bullet-text"><strong>No shared learning</strong> — Every agent starts from zero, every time</div>
+          <div class="bullet-text"><strong>Shared data, not shared intelligence</strong> — same database, but every agent still thinks alone</div>
         </div>
         <div class="bullet-item">
-          <span class="bullet-icon">🌪️</span>
-          <div class="bullet-text"><strong>Chaotic swarm, not intelligent organization</strong> — Scale adds noise, not intelligence</div>
+          <span class="bullet-icon">📉</span>
+          <div class="bullet-text"><strong>Scale creates overhead, not intelligence</strong> — more agents = more coordination cost, diminishing returns</div>
         </div>
         <div class="bullet-item">
           <span class="bullet-icon">🔗</span>
-          <div class="bullet-text"><strong>Like brilliant people who can't collaborate</strong> — Individual talent without organizational structure</div>
+          <div class="bullet-text"><strong>No organizational memory</strong> — every insight dies with the conversation</div>
         </div>
       </div>
 
       <div class="divider"></div>
       <div style="font-size:clamp(0.85rem,1.5vw,1rem);font-weight:600;color:var(--white);">
-        The bottleneck isn't individual AI capability —
-        <span style="color:var(--cyan);">it's organizational intelligence.</span>
+        Coordination frameworks exist. <span style="color:var(--cyan);">Organizational intelligence doesn't.</span>
       </div>
     </section>
 
